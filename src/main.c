@@ -12,7 +12,7 @@ double number(void) { double d; scanf("%lf", &d); return d; } // read one double
 void expect(char c) { // expect char c from stream
     char d = get();
     if (c != d) {
-        fprintf(stderr, "Error: Expected %c but got %c.\n", c, d);
+        fprintf(stderr, "오류: %c를 예상했지만 %c를 받았습니다.", c, d);
     }
 }
 
