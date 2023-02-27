@@ -3,38 +3,38 @@
 
 double expression(void);
 
-double vars[26]; // variables
+double vars[26];
 
 char get(void) { char c = getchar(); return c; } // get one byte
-char peek(void) { char c = getchar(); ungetc(c, stdin); return c; } // peek at next byte
-double number(void) { double d; scanf("%lf", &d); return d; } // read one double
+char peek(void) { char c = getchar(); ungetc(c, stdin); return c; }
+double number(void) { double d; scanf("%lf", &d); return d; }
 
-void expect(char c) { // expect char c from stream
+void expect(char c) {
     char d = get();
     if (c != d) {
         fprintf(stderr, "오류: %c를 예상했지만 %c를 받았습니다.", c, d);
     }
 }
 
-double factor(void) { // read a factor
+double factor(void) {
     double f;
     char c = peek();
-    if (c == '(') { // an expression inside parantesis?
+    if (c == '(') {
         expect('(');
         f = expression();
         expect(')');
-    } else if (c >= 'A' && c <= 'Z') { // a variable ?
+    } else if (c >= 'A' && c <= 'Z') {
         expect(c);
         f = vars[c - 'A'];
-    } else { // or, a number?
+    } else {
         f = number();
     }
     return f;
 }
 
-double term(void) { // read a term
+double term(void) {
     double t = factor();
-    while (peek() == '*' || peek() == '/') { // * or / more factors
+    while (peek() == '*' || peek() == '/') {
         char c = get();
         if (c == '*') {
             t = t * factor();
@@ -45,9 +45,9 @@ double term(void) { // read a term
     return t;
 }
 
-double expression(void) { // read an expression
+double expression(void) {
     double e = term();
-    while (peek() == '+' || peek() == '-') { // + or - more terms
+    while (peek() == '+' || peek() == '-') {
         char c = get();
         if (c == '+') {
             e = e + term();
@@ -58,12 +58,12 @@ double expression(void) { // read an expression
     return e;
 }
 
-double statement(void) { // read a statement
+double statement(void) {
     double ret;
     char c = peek();
-    if (c >= 'A' && c <= 'Z') { // variable ?
+    if (c >= 'A' && c <= 'Z') {
         expect(c);
-        if (peek() == '=') { // assignment ?
+        if (peek() == '=') {
             expect('=');
             double val = expression();
             vars[c - 'A'] = val;
