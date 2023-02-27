@@ -12,7 +12,9 @@ double number(void) { double d; scanf("%lf", &d); return d; }
 void expect(char c) {
     char d = get();
     if (c != d) {
-        fprintf(stderr, "오류: %c를 예상했지만 %c를 받았습니다.", c, d);
+        fprintf(stderr, "\n"
+                        "Error: Expected %c but got %c.\n"
+                        , c, d);
     }
 }
 
