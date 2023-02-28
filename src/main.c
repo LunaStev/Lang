@@ -5,7 +5,7 @@ double expression(void);
 
 double vars[26];
 
-char get(void) { char c = getchar(); return c; } // get one byte
+char get(void) { char c = getchar(); return c; }
 char peek(void) { char c = getchar(); ungetc(c, stdin); return c; }
 double number(void) { double d; scanf("%lf", &d); return d; }
 
